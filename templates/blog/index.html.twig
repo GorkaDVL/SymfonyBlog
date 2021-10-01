@@ -5,36 +5,19 @@
 {% block body %}
 <section class="article">
 
+{% for article in articles %}
 <article>
-    <h2>Titre de l'article</h2>
-    <div class="metadata">Ecrit le 29/09/2021 à 19:00 dans la Catégorie Réseau</div>
+    <h2>{{ article.title }}</h2>
+    <div class="metadata">Ecrit le {{article.createdAt | date('d/M/Y') }} à {{article.createdAt | date('H/i') }} </div>
     <div class="content">
-        <img src="http://placehold.it/350x10" alt="">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro iusto, autem placeat laboriosam expedita quaerat.</p>
-        <p>Labore incidunt, officiis ipsam voluptatum numquam molestiae error aspernatur iure ducimus nisi rerum excepturi reprehenderit.</p>
-        <a href="{{ path('blog_show') }}" class="btn-primary">lire la suite</a>
+        <img src="{{ article.image }}" alt="" >
+        {{article.content | raw}}
+        
+        <a href="{{ path('blog_show', {'id':article.id} ) }}" class="btn-primary">lire la suite</a>
     </div>
 </article>
-<article>
-    <h2>Titre de l'article</h2>
-    <div class="metadata">Ecrit le 29/09/2021 à 19:00 dans la Catégorie Réseau</div>
-    <div class="content">
-        <img src="http://placehold.it/350x10" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus voluptatem qui blanditiis. Magni, blanditiis consequuntur.</p>
-        <p>Iusto nemo asperiores voluptatibus quibusdam voluptatem perferendis. Nesciunt earum voluptates, autem doloremque facere voluptate praesentium.</p>
-        <a href="{{ path('blog_show') }}" class="btn-primary">lire la suite</a>
-    </div>
-</article>
-<article>
-    <h2>Titre de l'article</h2>
-    <div class="metadata">Ecrit le 29/09/2021 à 19:00 dans la Catégorie Réseau</div>
-    <div class="content">
-        <img src="http://placehold.it/350x10" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid itaque eius odit recusandae, cupiditate voluptatibus.</p>
-        <p>Sint corporis et delectus excepturi modi odio quidem illum! Placeat debitis impedit modi dolore nisi.</p>
-        <a href="{{ path('blog_show') }}" class="btn-primary">lire la suite</a>
-    </div>
-</article>
+{% endfor %}
+
 
 </section>
 {% endblock %}
