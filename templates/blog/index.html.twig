@@ -3,6 +3,7 @@
 {% block title %}Hello BlogController!{% endblock %}
 
 {% block body %}
+<br><br><br>
 <section class="article">
 
 {% for article in articles %}
@@ -12,10 +13,12 @@
     <div class="content">
         <img src="{{ article.image }}" alt="" >
         {{article.content | raw}}
+        <br><br><br>
         
         <a href="{{ path('blog_show', {'id':article.id} ) }}" class="btn-primary">lire la suite</a>
     </div>
 </article>
+<br><br><br>
 {% endfor %}
 
 
