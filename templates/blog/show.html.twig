@@ -3,7 +3,7 @@
 {% block body %}
 <br><br>
 <article>
-    <h2>{{article.title}}</h2>
+    <h1>{{article.title}}</h1>
     <div class="metadata">Ecrit le {{article.createdAt | date('d/M/Y') }} à {{article.createdAt | date('H/i') }} dans la Catégorie {{article.category.title}}</div>
     <div class="content">
         <img src="{{article.image}}" alt="">
@@ -12,7 +12,7 @@
     </div>
 <br><br><br>
     <section id="commentaires">
-    <h2>Commentaires</h2>
+    <h2>{{ article.comments | length }} Commentaires</h2>
     <br><br><br>
     {% for comment in article.comments %}
         <div class="comment">
@@ -27,6 +27,22 @@
         </div>
     <br><br><br>
     {% endfor %}
+
+    {% if app.user %}
+    {{form_start(commentForm)}}
+    {{form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}})}}
+    {{form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}})}}
+    
+
+    <button class="btn btn-success">Commenter</button>
+
+    {{form_end(commentForm)}}
+    {% else %}
+    <h3>Vous ne pouvez pas commenter si vous n'êtes pas connecté</h3>
+    <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
+    {% endif %}
+
+
 </section>
 </article>
 
